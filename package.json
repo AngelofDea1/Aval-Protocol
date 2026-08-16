@@ -1,0 +1,37 @@
+{
+  "name": "aval-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bonded AI underwriting for tokenized real-world cashflows, on X Layer",
+  "scripts": {
+    "build": "forge build",
+    "compile": "node tools/compile.mjs",
+    "test": "forge test -vv",
+    "test:js": "node test/js/aval.test.mjs && node test/js/adapters.test.mjs && node test/js/adversarial.test.mjs && node test/js/manifest.test.mjs && node test/js/model-sync.test.mjs && node test/js/frontend-abi.test.mjs && node test/js/ingest.test.mjs",
+    "test:agent": "node agent/test/parity.test.mjs && node agent/test/underwrite.test.mjs",
+    "test:all": "npm run test:js && npm run test:agent",
+    "model:train": "python3 agent/model/train.py && python3 agent/model/export_feature_fixtures.py",
+    "underwrite": "node agent/src/index.mjs underwrite",
+    "sign": "node agent/src/index.mjs sign",
+    "monitor": "node agent/src/monitor.mjs",
+    "ingest:check": "node agent/src/ingest/defillama.mjs",
+    "fund": "node agent/src/fund.mjs",
+    "keeper": "node agent/src/keeper.mjs",
+    "check": "bash script/check-deployment.sh",
+    "check:manifest": "node script/verify-manifest.mjs",
+    "slash-demo": "bash script/slash-demo.sh",
+    "verify": "bash script/verify-contracts.sh",
+    "slither": "slither . --exclude-dependencies --filter-paths \"node_modules|mocks\"",
+    "mint": "bash script/mint-usdt.sh",
+    "sync:model": "node script/sync-model-to-web.mjs",
+    "sync:addresses": "node script/sync-addresses.mjs"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.1.0"
+  },
+  "devDependencies": {
+    "@ethereumjs/vm": "^10.0.0",
+    "ethers": "6.13.4",
+    "solc": "0.8.28"
+  }
+}

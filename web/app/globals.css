@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@source "../app";
+@source "../components";
+@source "../lib";
+@source "../hooks";
+
+
+/*
+ * Dark, with a single warm accent.
+ *
+ * Amber rather than the usual crypto blue or violet, and it ties to the name: an aval is a
+ * written guarantee, collateral pledged against someone else's debt.
+ *
+ * The neutrals stay at hue 0, true grey. A tinted "near-black" is the most common tell of a
+ * generated theme, so the warmth lives in the accent and nowhere else.
+ *
+ * Every token the shadcn/ui components reference must exist here: in Tailwind v4 an
+ * undefined --color-* means the utility silently does not exist, so a missing token renders
+ * unstyled rather than erroring.
+ */
+:root {
+  --background: 0 0% 5%;
+  --foreground: 0 0% 96%;
+
+  --surface: 0 0% 8%;
+  --surface-2: 0 0% 11%;
+
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 9%;
+  --popover-foreground: 0 0% 96%;
+
+  --primary: 38 95% 56%;
+  --primary-foreground: 30 60% 6%;
+
+  --secondary: 0 0% 14%;
+  --secondary-foreground: 0 0% 96%;
+
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 58%;
+
+  --accent: 0 0% 14%;
+  --accent-foreground: 0 0% 96%;
+
+  /*
+   * There is no green here, and that is deliberate.
+   *
+   * A green-good / red-bad pair is the default vocabulary of a generated dashboard: it costs
+   * nothing to reach for, so everything reaches for it, and a screen of traffic lights reads
+   * as untouched rather than designed. It is also the worst possible pairing for the roughly
+   * one in twelve men who cannot separate the two hues.
+   *
+   * So state is carried by weight, position and shape instead - a brighter number, a filled
+   * dot, which side of a centre line a bar sits on - and every one of those is legible to
+   * everybody. Colour is treated as a scarce resource and spent once per screen.
+   *
+   * Red survives in exactly one role: money that actually left someone's hands. Not warnings,
+   * not refusals, not a failed form. Desaturated well below the usual alarm red so it reads
+   * as ink on a page rather than a browser error.
+   */
+  --destructive: 6 42% 54%;
+  --destructive-foreground: 0 0% 96%;
+
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 38 95% 56%;
+
+  --hero-sub: 0 0% 80%;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: 'Geist Sans', system-ui, sans-serif;
+  --font-display: 'General Sans', 'Geist Sans', system-ui, sans-serif;
+  /* Menlo is deliberately absent: its zero is slashed. */
+  --font-mono: ui-monospace, SFMono-Regular, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', monospace;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-surface: hsl(var(--surface));
+  --color-surface-2: hsl(var(--surface-2));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-hero-sub: hsl(var(--hero-sub));
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  /*
+   * NUMBERS. One class, used for every figure on the site.
+   *
+   * The slashed zero was chased three times before this. General Sans draws one by default,
+   * Menlo draws one, and on macOS `ui-monospace` resolves to SF Mono which draws one too. So
+   * the fix is not another fallback list: it is to stop letting an unknown font decide.
+   *
+   * Geist Sans is bundled with the app rather than requested from a CDN, and its zero was
+   * confirmed by reading the font binary: a plain two-contour oval, no slash and no dot. It
+   * carries proper tabular figures, so columns still line up. Every number, amount, address
+   * and percentage uses this.
+   *
+   * The feature settings are belt and braces for the case where the browser falls back before
+   * Geist has loaded.
+   */
+  .figure {
+    font-family: 'Geist Sans', system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings:
+      'tnum' 1,
+      'zero' 0,
+      'ss01' 0,
+      'ss02' 0;
+  }
+
+  /* Kept as an alias so existing markup keeps working; identical behaviour. */
+  .tabular {
+    font-family: 'Geist Sans', system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings:
+      'tnum' 1,
+      'zero' 0,
+      'ss01' 0,
+      'ss02' 0;
+  }
+
+  /*
+   * Real code blocks keep a monospace face, because indentation and column alignment are the
+   * whole point there, and a developer reading a shell command is not troubled by a slashed
+   * zero. Everything that is *data* rather than *code* uses .figure above.
+   */
+  pre code {
+    font-feature-settings:
+      'zero' 0,
+      'ss01' 0;
+  }
+}

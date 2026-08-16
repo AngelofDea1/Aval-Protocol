@@ -1,0 +1,9 @@
+{
+  "chainId": 1952,
+  "registry": "0xd0424f9908C36D3E91AFaEf6C546eeD7D8E742E2",
+  "reputation": "0xCBda55841d6C1EE5585155F52d4cecA50ce53fA5",
+  "vault": "0x0D410fbc0942919F0ab8a55B1fbbFF5E9dc3D3fa",
+  "dealManager": "0x0f9bF65cb7f2549EA41012A9D692986bE633d52F",
+  "protocolRevenueAdapter": "0xe67808e42a12EC5beBE54EB782bE11B0d84575e3",
+  "invoiceAdapter": "0x1B41287C910a7580460B78a4e3A2675195269d9a"
+}

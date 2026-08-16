@@ -1,0 +1,23 @@
+node_modules/
+/lib/
+out/
+out-solc/
+cache/
+broadcast/
+.env
+.env.*
+!.env.example
+*.log
+agent/dist/
+agent/.data/
+__pycache__/
+.venv/
+.next/
+next-env.d.ts
+.env.local
+*.tsbuildinfo
+
+# Templates are the whole point: a clone with no example cannot be configured.
+!.env.example
+!web/.env.example
+
