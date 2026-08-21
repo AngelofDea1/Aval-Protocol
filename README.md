@@ -15,9 +15,7 @@ underwriter does not just score the credit, it guarantees it with its own capita
 **Live app:** https://aval-protocol.vercel.app
 **Agent manifest:** https://aval-protocol.vercel.app/api/agent
 
-Live on **X Layer testnet, chain 1952.** A real loan was funded against a signed AI opinion,
-repaid, settled, and the underwriter earned a Brier-scored fee with its accuracy written
-onchain.
+Live on **X Layer Mainnet, chain 196.** (Originally deployed and proven on testnet, where a real loan was funded against a signed AI opinion, repaid, settled, and the underwriter earned a Brier-scored fee with its accuracy written onchain.)
 
 | Contract | Address |
 |---|---|
@@ -269,8 +267,14 @@ npm run check:manifest    # fails loudly if the manifest has drifted from the co
 
 ## Status
 
-**Live on X Layer testnet.** A real loan was funded against a signed AI opinion, repaid,
-settled, and the underwriter earned a Brier-scored fee with its accuracy recorded onchain.
+**Live on X Layer Mainnet.** (Hackathon requirement fulfilled.)
+
+```
+DealManager   0xc19D7895592051145444A4C9B603BF162baC6Ce8
+SeniorVault   0xE542d28ab55709f055B920bFfDA49B89D31A7289
+```
+
+**Previously proven on X Layer Testnet.** A real loan was funded against a signed AI opinion, repaid, settled, and the underwriter earned a Brier-scored fee with its accuracy recorded onchain.
 
 ```
 DealManager   0x0f9bF65cb7f2549EA41012A9D692986bE633d52F
@@ -291,8 +295,7 @@ Built and verified: contracts, adapters, pause mechanism, the model and its Pyth
 parity, the full agent pipeline, the settlement keeper, the frontend, and an adversarial
 suite covering every finding in `SECURITY.md`.
 
-**Not done: mainnet deployment**, which is a stated participation requirement for the
-hackathon. Also outstanding: OKX DEX routing and a persistent indexer,
+**Completed: mainnet deployment**, fulfilling the stated participation requirement for the hackathon. Also outstanding: OKX DEX routing and a persistent indexer,
 which the frontend does not currently need since it reads the chain directly.
 
 ## Security
